@@ -1,0 +1,19 @@
+version: '3.8'  # Versión de Docker Compose que se está utilizando
+
+services:
+  db:
+    image: postgres:15.2  # Imagen oficial de PostgreSQL en su versión 15.2
+    restart: always  # Asegura que el contenedor se reinicie automáticamente si se detiene
+
+    ports:
+      - "5432:5432"  # Mapea el puerto 5432 del contenedor al puerto 5432 del host
+
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}  # Variable de entorno para la contraseña de la base de datos
+      POSTGRES_DB: ${DB_NAME}  # Variable de entorno para el nombre de la base de datos
+      POSTGRES_USER: ${DB_USER}  # Variable de entorno para el usuario de la base de datos
+
+    container_name: authDB  # Nombre personalizado para el contenedor
+
+    volumes:
+      - ./postgres:/var/lib/postgresql/data  # Monta un volumen para la persistencia de datos
